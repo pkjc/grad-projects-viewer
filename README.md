@@ -1,3 +1,8 @@
-This project is created from a GitLab [Project Template](https://docs.gitlab.com/ce/gitlab-basics/create-project.html)
+A NodeJS+Express project for assignment 3 of CSI5510.
 
-Additions and changes to the project can be proposed [on the original project](https://gitlab.com/gitlab-org/project-templates/express)
+## Features
+
+- Registration
+- Login & Logout
+- Session management
+- Listing of grad projects
