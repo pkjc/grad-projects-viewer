@@ -2,9 +2,10 @@ extends layout
 
 block content
   .container
+    //Modal launcher
     button.btn.btn-primary(type='button', data-toggle='modal', data-target='#exampleModalCenter')
-      | Launch demo modal
-    // Modal
+      | Launch demo modal button
+    // Modal content
     #exampleModalCenter.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
       .modal-dialog.modal-dialog-centered(role='document')
         .modal-content
@@ -13,7 +14,7 @@ block content
             button.close(type='button', data-dismiss='modal', aria-label='Close')
               span(aria-hidden='true') ×
           .modal-body
-            | ...
+            | content of the modal goes here.
           .modal-footer
             button.btn.btn-secondary(type='button', data-dismiss='modal') Close
             button.btn.btn-primary(type='button') Save changes
