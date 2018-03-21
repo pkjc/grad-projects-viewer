@@ -1,5 +1,39 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  .container
+    button.btn.btn-primary(type='button', data-toggle='modal', data-target='#exampleModalCenter')
+      | Launch demo modal
+    // Modal
+    #exampleModalCenter.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+      .modal-dialog.modal-dialog-centered(role='document')
+        .modal-content
+          .modal-header
+            h5#exampleModalLongTitle.modal-title Modal title
+            button.close(type='button', data-dismiss='modal', aria-label='Close')
+              span(aria-hidden='true') ×
+          .modal-body
+            | ...
+          .modal-footer
+            button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+            button.btn.btn-primary(type='button') Save changes
+    hr
+
+    form
+      .form-group
+        label(for='exampleInputEmail1') Email address
+        input#exampleInputEmail1.form-control(type='email', aria-describedby='emailHelp', placeholder='Enter email')
+        small#emailHelp.form-text.text-muted We'll never share your email with anyone else.
+      .form-group
+        label(for='exampleInputPassword1') Password
+        input#exampleInputPassword1.form-control(type='password', placeholder='Password')
+      button.btn.btn-primary(type='submit') Submit
+
+    hr
+
+    .list-group
+      a.list-group-item.list-group-item-action(href='#') Cras justo odio
+      a.list-group-item.list-group-item-action(href='#') Dapibus ac facilisis in
+      a.list-group-item.list-group-item-action(href='#') Morbi leo risus
+      a.list-group-item.list-group-item-action(href='#') Porta ac consectetur ac
+      a.list-group-item.list-group-item-action(href='#') Vestibulum at eros
