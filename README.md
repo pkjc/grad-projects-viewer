@@ -22,7 +22,7 @@ A NodeJS+Express project for assignment 3 of CSI5510.
     - ```git push```
 - Enter your github credentials when prompted
 
-## How to run the project
+## How to run the app
 
 - Open the terminal/command line 
 - ```cd``` into the project directory
