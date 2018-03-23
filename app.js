@@ -9,6 +9,20 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var projects = require('./routes/project');
 
+
+var bodyParser = require('body-parser');
+var exphbs = require('express-handlebars');
+var expressValidator = require('express-validator');
+var flash = require('connect-flash');
+var session = require('express-session');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var mongo = require('mongodb');
+var mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost/login');
+var db = mongoose.connection;
+
 var app = express();
 
 // view engine setup
