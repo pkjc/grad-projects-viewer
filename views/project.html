@@ -3,37 +3,85 @@
     <title>Grad Projects</title>
    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script type="text/javascript">
+      function project(){
+        var name = 'rashmipethe';
+        $.ajax({
+          type:"GET",
+          url:"/projects/projectlist",
+          data:{name:name},
+          success: function(data){
+            alert('response');
+          }
+        });
+      }
+
+    </script>
   </head>
   <body>
-      <h1 style="padding-left: 10%;padding-top: 2%">Grad Projects - Rashmi Pethe</h1>
-      
-      <div class="container">
-        <div class="row" style="width:50%;padding-top: 2%">
-          <div class="col-sm">
-            <nav class="navbar navbar-dark bg-dark">
-              <p class="navbar-brand" >Click on Add Project to add new project</p>
-            </nav>
-            <div class="input" style="padding-top: 5%">
-              <input class="btn btn-primary" type="submit" value="Add Project">
+      <div class="card" >
+        <nav class="navbar navbar-dark bg-dark" style="padding-left: 10%">
+          <span class="navbar-brand mb-0 h1">Home</span>
+        </nav>        
+        <hr>
+        <div class="container">
+          <div class="row" style="width:100%; height: 74%;">
+            <div class="col-sm">
+              <div class="card-header">
+                <h5 class="card-title">{{user}} Profile</h5>
+              </div>
+              <div class="card-body">
+                {{#user}}
+                  <p class="card-text">Name:  Rashmi Pethe</p>  
+                  <p class="card-text">Email: rashmipethe@oakland.edu</p>  
+                  <p class="card-text">Street Address: Rochester</p>  
+                  <p class="card-text">State: MI</p>            
+                  <p class="card-text">Zip:   48307</p>  
+                {{/user}}
+
+                <a href="#" class="btn btn-primary">Add new project here</a>
+              </div>
             </div>
+            <div class="col-sm">
+                <div class="card-header">
+                  <h5 class="card-title">Listing of current Grad Projects</h5>
+                </div>
+                <div class="card-body">
+                  <ul class="list-group list-group-flush">
+                      {{#list}}
+                        <li class="list-group-item list-group-item-action"><a onClick="project(); return false;" href="#projectModal" class="card-link" data-toggle="modal">{{pname}}</a></li>            
+                      {{/list}}             
+                  </ul>
+                </div>   
+              </div>           
+            </div>          
+        </div>
+        <nav class="navbar navbar-dark bg-dark">
+          <span class="navbar-brand mb-0 h6"  style="text-align: center">All rights reserved.</span>
+        </nav>          
+      </div>   
+      <div class="modal fade" id="projectModal" tabindex="-1" role="dialog" aria-labelledby="projectModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="projectModalLabel">Project Details</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+             {{#plist}}
+                <li class="list-group-item list-group-item-action"><span>pname</span></li>            
+              {{/plist}} 
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Edit</button>
           </div>
         </div>
-        <div class="row" style="width: 50%;padding-top: 2%">
-          <div class="col-sm">
-            <nav class="navbar navbar-dark bg-dark">
-              <p class="navbar-brand" >Listing of current projects</p>
-            </nav>
-            <ul class="list-group">
-              <li><a href="#" class="list-group-item list-group-item-action" data-toggle="list">Cras justo odio</a></li>
-              <li><a href="#" class="list-group-item list-group-item-action" data-toggle="list">Dapibus ac facilisis in</a></li>
-              <li><a href="#" class="list-group-item list-group-item-action" data-toggle="list">Morbi leo risus</a></li>
-              <li><a href="#" class="list-group-item list-group-item-action" data-toggle="list">Porta ac consectetur ac</a></li>
-              <li><a href="#" class="list-group-item list-group-item-action" data-toggle="list">Vestibulum at eros</a></li>
-            </ul>
-          </div>          
-        </div>      
+      </div>
     </div>
-      
+         
       <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
