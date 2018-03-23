@@ -11,7 +11,7 @@ var projects = require('./routes/project');
 
 
 var bodyParser = require('body-parser');
-var exphbs = require('express-handlebars');
+
 var expressValidator = require('express-validator');
 var flash = require('connect-flash');
 var session = require('express-session');
