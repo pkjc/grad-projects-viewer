@@ -4,6 +4,8 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
 var User = require('../models/user');
+var mongoClient = require('mongodb').MongoClient, assert = require('assert');
+var url = 'mongodb://aaditi3981:swlp123@ds123399.mlab.com:23399/userdatabase';
 
 // Register
 router.get('/register', function(req, res) {
