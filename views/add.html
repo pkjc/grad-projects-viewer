@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+ <div class="pt-5">
+    <div class="container">
+                    <div class="col-xs-6">
+                        <h2>Enter Project Details</h2>
+                    </div>
+            <hr>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <form id="psubmission-form" action="/db" method="post" role="form">
+                                        <div class="form-group">
+                                            <input type="text" name="pname" id="pname" tabindex="1" class="form-control" placeholder="Project Name" value="">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" name="abs" id="abs" tabindex="1" class="form-control" placeholder="Abstract" value="">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" name="course" id="course" tabindex="2" class="form-control" placeholder="Course">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" name="type" id="type" tabindex="2" class="form-control" placeholder="Type">
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-sm-6 col-sm-offset-3">
+                                                    <input type="submit" name="project-submit" id="project-submit" tabindex="4" class="form-control btn btn-success" value="Submit Now">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+     </div>
+ </div>
+</body>
+</html>

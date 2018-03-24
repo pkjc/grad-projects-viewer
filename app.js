@@ -4,12 +4,15 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var http = require('http');
+var router = express.Router();
+var alert = require('alert-node');
 
 var routes = require('./routes/index');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var projects = require('./routes/project');
-
+var data = require('./routes/mongo');
 
 var bodyParser = require('body-parser');
 
@@ -46,6 +49,7 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/user', users);
 app.use('/projects', projects);
+app.use('/data',data);
 
 // Express Session
 app.use(session({
@@ -64,7 +68,7 @@ app.use(expressValidator({
         var namespace = param.split('.')
         , root    = namespace.shift()
         , formParam = root;
-  
+
       while(namespace.length) {
         formParam += '[' + namespace.shift() + ']';
       }
@@ -75,7 +79,7 @@ app.use(expressValidator({
       };
     }
   }));
-  
+
   // Connect Flash
   app.use(flash());
 
