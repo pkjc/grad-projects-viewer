@@ -1,31 +1,32 @@
 var express = require('express');
-var app = express();
+var router = express.Router();
 
 var mongoClient = require('mongodb').MongoClient, assert = require('assert');
+var url = 'mongodb://swlp:csi5510@ds123399.mlab.com:23399/gradprojects';
 
-var url = 'mongodb://localhost:27017/gradprojects';
 
+var projectArray;
+var user;
 mongoClient.connect(url, function(err, client){
 	if(err){
-		return console.dir(err);
+		return console.log(err);
 	}
 
 	console.log("Connected Successfully to mongo server");
 	var db = client.db('gradprojects');
-	var query= {user:"rashmipethe"}
+	var query= {userId:"rashmipethe"};
 	db.collection('projects').find(query).toArray(function(err, result){
 		if(err){
 			throw err;
 		}
+
+		projectArray = result;
+		user = projectArray[0].userId;
 		var intLength = result.length;
 		for (var i= 0; i < intLength ; i++) {
 			var projects = result[i];
-			console.log(projects.user);
-			var pLength = projects.project.length;
-			for (var j = 0; j < pLength; j++) {
-				console.log(projects.project[j].pname);
-			}
-			
+			console.log(projects.userId);
+						
 		}
 		
 	});
@@ -33,18 +34,40 @@ mongoClient.connect(url, function(err, client){
 	client.close();
 });
 
-var engines = require('consolidate');
-app.engine('html', engines.mustache);
-app.set('view engine', 'html');
-
-const path = require('path');
-const VIEWS = path.join(__dirname, '../views');
-console.log(VIEWS);
-
-app.get('/', function(req, res){
-	res.sendFile('./project.html', {root:VIEWS});
+router.get('/projectdetails', function(req, res) {
+	console.log("Request receieved: For project details");
+	
+	mongoClient.connect(url, function(err, client){
+		if(err){
+			throw err;
+		}
+		var username = req.query.name;
+		console.log('Username:'+ username);
+		var pname = req.query.pname;
+		console.log('Project name:'+ pname);
+	
+		var dbconnect = client.db('gradprojects');
+		
+		dbconnect.collection('projects').find({userId:username, pname:pname}).toArray(function(err, result){
+			console.log(result);
+			if(result.length === 0){
+				var response = {"project":"Error"};
+			} else{
+				var response = {"project": result[0].pname, 
+								"course": result[0].courseId,
+								"abstract": result[0].abstract,
+								"type": result[0].type
+								};				
+			}
+			console.log('response' + response.project);	
+				res.send(response);
+		});		
+	});
+	
 });
 
-app.listen(3000, function(){
-	console.log('Server is listening at port 3000');
+router.get('/', function(req, res){
+	res.render('project', {user:user, list: projectArray});
 });
+
+module.exports = router;

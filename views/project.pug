@@ -1,0 +1,31 @@
+html
+  head
+    title Grad Projects
+    link(href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', rel='stylesheet', integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm', crossorigin='anonymous')
+  body
+    h1(style='padding-left: 10%;padding-top: 2%') Grad Projects - Rashmi Pethe
+    .container
+      .row(style='width:50%;padding-top: 2%')
+        .col-sm
+          nav.navbar.navbar-dark.bg-dark
+            p.navbar-brand Click on Add Project to add new project
+          .input(style='padding-top: 5%')
+            input.btn.btn-primary(type='submit', value='Add Project')
+      .row(style='width: 50%;padding-top: 2%')
+        .col-sm
+          nav.navbar.navbar-dark.bg-dark
+            p.navbar-brand Listing of current projects
+          ul.list-group
+            li
+              a.list-group-item.list-group-item-action(href='#', data-toggle='list') #{projectArray[0].pname}
+            li
+              a.list-group-item.list-group-item-action(href='#', data-toggle='list') Dapibus ac facilisis in
+            li
+              a.list-group-item.list-group-item-action(href='#', data-toggle='list') Morbi leo risus
+            li
+              a.list-group-item.list-group-item-action(href='#', data-toggle='list') Porta ac consectetur ac
+            li
+              a.list-group-item.list-group-item-action(href='#', data-toggle='list') Vestibulum at eros
+    script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js', integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN', crossorigin='anonymous')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js', integrity='sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl', crossorigin='anonymous')
+    script(src='https://code.jquery.com/jquery-3.2.1.min.js')
