@@ -3,19 +3,40 @@
     <title>Grad Projects</title>
    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
     <script type="text/javascript">
-      function project(){
-        var name = 'rashmipethe';
+      function project(user, anchor){
+        var pname = $(anchor).text();
+        
         $.ajax({
           type:"GET",
-          url:"/projects/projectlist",
-          data:{name:name},
+          url:"/projects/projectdetails",
+          async:false,
+          timeout:5000,
+          data:{name:user,pname:pname},
           success: function(data){
-            alert('response');
-          }
-        });
-      }
+            plist = data;
+            if(data.project === 'Error'){
+              document.getElementById('title').innerHTML = 'No project detail found!';
+              document.getElementById('titleLbl').innerHTML = none;
+              document.getElementById('courseLbl').innerHTML = none;
+              document.getElementById('abLbl').innerHTML = none;
+              document.getElementById('typeLbl').innerHTML = none;
+              
+            } else {
+              document.getElementById('titleLbl').innerHTML = 'Title:';
+              document.getElementById('courseLbl').innerHTML = 'Course:';
+              document.getElementById('abLbl').innerHTML = 'Abstract:';
+              document.getElementById('typeLbl').innerHTML = 'Type:';
 
+              document.getElementById('title').innerHTML = data.project;
+              document.getElementById('course').innerHTML= data.course;
+              document.getElementById('abstract').innerHTML = data.abstract;
+              document.getElementById('type').innerHTML = data.type;
+            }            
+          }
+        });        
+      }
     </script>
   </head>
   <body>
@@ -49,7 +70,7 @@
                 <div class="card-body">
                   <ul class="list-group list-group-flush">
                       {{#list}}
-                        <li class="list-group-item list-group-item-action"><a onClick="project(); return false;" href="#projectModal" class="card-link" data-toggle="modal">{{pname}}</a></li>            
+                        <li class="list-group-item list-group-item-action"><a onClick="project('{{user}}',this); return false;" href="#projectModal" class="card-link" data-toggle="modal">{{pname}}</a></li>            
                       {{/list}}             
                   </ul>
                 </div>   
@@ -70,9 +91,12 @@
             </button>
           </div>
           <div class="modal-body">
-             {{#plist}}
-                <li class="list-group-item list-group-item-action"><span>pname</span></li>            
-              {{/plist}} 
+            <ul class="list-group list-group-flush">                      
+                <li class="list-group-item list-group-item-action"><strong id="titleLbl"></strong>&nbsp;&nbsp;<span id="title"></span></li>
+                <li class="list-group-item list-group-item-action"><strong id="courseLbl"></strong>&nbsp;&nbsp;<span id="course"></span></li>
+                <li class="list-group-item list-group-item-action"><strong id="abLbl"></strong>&nbsp;&nbsp;<span id="abstract"></span></li>
+                <li class="list-group-item list-group-item-action"><strong id="typeLbl"></strong>&nbsp;&nbsp;<span id="type"></span></li>               
+            </ul>  
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -87,6 +111,5 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  </body>
-  
+  </body>  
 </html>
