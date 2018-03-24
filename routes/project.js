@@ -2,17 +2,18 @@ var express = require('express');
 var router = express.Router();
 
 var mongoClient = require('mongodb').MongoClient, assert = require('assert');
-var url = 'mongodb://localhost:27017/gradprojects2';
+var url = 'mongodb://swlp:csi5510@ds123399.mlab.com:23399/gradprojects';
+
 
 var projectArray;
 var user;
 mongoClient.connect(url, function(err, client){
 	if(err){
-		return console.dir(err);
+		return console.log(err);
 	}
 
 	console.log("Connected Successfully to mongo server");
-	var db = client.db('gradprojects2');
+	var db = client.db('gradprojects');
 	var query= {userId:"rashmipethe"};
 	db.collection('projects').find(query).toArray(function(err, result){
 		if(err){
@@ -45,7 +46,7 @@ router.get('/projectdetails', function(req, res) {
 		var pname = req.query.pname;
 		console.log('Project name:'+ pname);
 	
-		var dbconnect = client.db('gradprojects2');
+		var dbconnect = client.db('gradprojects');
 		
 		dbconnect.collection('projects').find({userId:username, pname:pname}).toArray(function(err, result){
 			console.log(result);
