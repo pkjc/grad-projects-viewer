@@ -60,7 +60,7 @@
                   <p class="card-text">Zip:   48307</p>  
                 {{/user}}
 
-                <a href="#" class="btn btn-primary">Add new project here</a>
+                <a href="/projects/add" class="btn btn-primary">Add new project here</a>
               </div>
             </div>
             <div class="col-sm">
@@ -68,11 +68,14 @@
                   <h5 class="card-title">Listing of current Grad Projects</h5>
                 </div>
                 <div class="card-body">
-                  <ul class="list-group list-group-flush">
-                      {{#list}}
-                        <li class="list-group-item list-group-item-action"><a onClick="project('{{user}}',this); return false;" href="#projectModal" class="card-link" data-toggle="modal">{{pname}}</a></li>            
-                      {{/list}}             
-                  </ul>
+                  {{#errorMsg}}
+                    {{msg}}
+                  {{/errorMsg}}
+                  {{#list}}
+                    <ul class="list-group list-group-flush">                      
+                        <li class="list-group-item list-group-item-action"><a onClick="project('{{user}}',this); return false;" href="#projectModal" class="card-link" data-toggle="modal">{{pname}}</a></li>                                 
+                    </ul>
+                  {{/list}}  
                 </div>   
               </div>           
             </div>          

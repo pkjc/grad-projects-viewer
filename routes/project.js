@@ -1,73 +1,70 @@
 var express = require('express');
 var router = express.Router();
+var app = require('../app');
 
-var mongoClient = require('mongodb').MongoClient, assert = require('assert');
-var url = 'mongodb://swlp:csi5510@ds123399.mlab.com:23399/gradprojects';
+var Project = require('../models/project');
 
+//Router to get projects corresponding to logged in user.
+router.get('/', function(req, res){
+	var projectArray;
+	//var curSession = req.session;
+	//var user = curSession.user;
+	//const db = req.app.locals.db;
+	
+	//console.log("Connected Successfully to mongo server");
+	//const dbo = db.db("gradprojects");
+	//var userName = user.username;
+	var userName = "rashmipethe";
+	//var query = {userName:userName};
+	Project.getProjectsByUser(userName,function(err, result){
+		console.log('inside the project query' + result);
 
-var projectArray;
-var user;
-mongoClient.connect(url, function(err, client){
-	if(err){
-		return console.log(err);
-	}
-
-	console.log("Connected Successfully to mongo server");
-	var db = client.db('gradprojects');
-	var query= {userId:"rashmipethe"};
-	db.collection('projects').find(query).toArray(function(err, result){
 		if(err){
+			console.error(err);
 			throw err;
+		} else if(result.length === 0){
+			var errorMsg = {msg : "No projects added. To add, click on Add new project option below."};
+			res.render('project', {user:userName, errorMsg : errorMsg})
+		} else{
+			projectArray = result;
+			//user = projectArray[0].userName;
+			res.render('project', {user:userName, list: projectArray});
 		}
-
-		projectArray = result;
-		user = projectArray[0].userId;
-		var intLength = result.length;
-		for (var i= 0; i < intLength ; i++) {
-			var projects = result[i];
-			console.log(projects.userId);
-						
-		}
-		
 	});
 	
-	client.close();
 });
 
+//Router to get the project details for project name.
 router.get('/projectdetails', function(req, res) {
 	console.log("Request receieved: For project details");
-	
-	mongoClient.connect(url, function(err, client){
+	var username = req.query.name;
+	console.log('Username:'+ username);
+	var pname = req.query.pname;
+	console.log('Project name:'+ pname);
+
+	Project.getProjectByNameAndUser(pname, username, function(err, project){
+		console.log(project);
 		if(err){
+			console.error(err);
 			throw err;
+		} else if(project === 'undefined' || project === null){
+			console.log(project);
+			var response = {"project":"Error"};
+		} else{
+			var response = {"project": project.pname, 
+							"course": project.courseId,
+							"abstract": project.abstract,
+							"type": project.pType
+							};				
 		}
-		var username = req.query.name;
-		console.log('Username:'+ username);
-		var pname = req.query.pname;
-		console.log('Project name:'+ pname);
-	
-		var dbconnect = client.db('gradprojects');
-		
-		dbconnect.collection('projects').find({userId:username, pname:pname}).toArray(function(err, result){
-			console.log(result);
-			if(result.length === 0){
-				var response = {"project":"Error"};
-			} else{
-				var response = {"project": result[0].pname, 
-								"course": result[0].courseId,
-								"abstract": result[0].abstract,
-								"type": result[0].type
-								};				
-			}
-			console.log('response' + response.project);	
-				res.send(response);
-		});		
-	});
-	
+		console.log('response' + response.project);	
+		res.send(response);
+	});		
 });
 
-router.get('/', function(req, res){
-	res.render('project', {user:user, list: projectArray});
+router.get('/add', function(req, res){
+	console.log('here to add project');
+	res.render('add');
 });
 
 module.exports = router;
